@@ -49,12 +49,7 @@ class WebsiteMonitor {
     this.rateLimitDelay = 1000; // Minimum 1 second between checks
 
     console.log(`🖥️ Platform: ${this.platform}, Monitoring interval: ${this.monitoringInterval}ms, Browser check: ${this.browserCheckInterval}ms`);
-
-    if (this.isWindows) {
-      console.log(`✅ Browser monitoring and screenshots: ENABLED (Windows platform)`);
-    } else {
-      console.log(`⚠️ Browser monitoring and screenshots: DISABLED (${this.platform} not supported - Windows only)`);
-    }
+    console.log(`✅ Browser monitoring and screenshots: ENABLED (Cross-platform support with buildpacks)`);
 
     // Start cache cleanup process
     this.startCacheCleanup();
@@ -69,12 +64,7 @@ class WebsiteMonitor {
       return;
     }
 
-    // Check if platform supports monitoring
-    if (!this.isWindows) {
-      console.log(`⚠️ Website monitoring is only supported on Windows. Current platform: ${this.platform}`);
-      console.log(`📱 Employee ${employeeId} monitoring disabled - platform not supported`);
-      return;
-    }
+
 
     console.log(`Starting website monitoring for employee ${employeeId}`);
 
@@ -274,20 +264,23 @@ class WebsiteMonitor {
 
 
   /**
-   * Get active window information - Windows only
+   * Get active window information with cross-platform support
    */
   async getActiveWindow() {
     try {
       if (this.isWindows) {
         return await this.getActiveWindowWindows();
+      } else if (this.isLinux) {
+        return await this.getActiveWindowLinux();
+      } else if (this.isMacOS) {
+        return await this.getActiveWindowMacOS();
       } else {
-        // Only Windows is supported for browser monitoring
-        console.log(`🔄 Browser monitoring not available on ${this.platform} - Windows only feature`);
-        return null;
+        console.warn(`⚠️ Unsupported platform: ${this.platform}, using fallback method`);
+        return await this.getActiveWindowFallback();
       }
     } catch (error) {
       console.error('Error getting active window:', error);
-      return null;
+      return await this.getActiveWindowFallback();
     }
   }
 

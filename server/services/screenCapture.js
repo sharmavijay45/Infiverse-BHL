@@ -76,11 +76,7 @@ class ScreenCaptureService {
     try {
       const { employeeId, sessionId } = captureConfig;
 
-      // Check if platform supports screenshots
-      if (process.platform !== 'win32') {
-        console.log(`📸 Screenshot capture not available on ${process.platform} - Windows only feature`);
-        return null;
-      }
+
 
       // Take screenshot
       const screenshotBuffer = await screenshot({ format: 'png' });
