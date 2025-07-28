@@ -319,7 +319,7 @@ export function CreateTaskDialog({ open, onOpenChange }) {
                 <SelectTrigger id="department" className="bg-white border-gray-300">
                   <SelectValue placeholder="Select department" />
                 </SelectTrigger>
-                <SelectContent className="bg-white border-gray-300 max-h-60 overflow-y-auto">
+                <SelectContent className="bg-white border-gray-300 max-h-60 overflow-y-auto z-[70]">
                   {departments.map((dept) => (
                     <SelectItem key={dept._id} value={dept._id}>
                       {dept.name}
@@ -427,7 +427,7 @@ export function CreateTaskDialog({ open, onOpenChange }) {
                 <SelectTrigger id="priority" className="bg-white border-gray-300">
                   <SelectValue placeholder="Select priority" />
                 </SelectTrigger>
-                <SelectContent className="bg-white border-gray-300">
+                <SelectContent className="bg-white border-gray-300 z-[70]">
                   <SelectItem value="High">High</SelectItem>
                   <SelectItem value="Medium">Medium</SelectItem>
                   <SelectItem value="Low">Low</SelectItem>
@@ -458,7 +458,7 @@ export function CreateTaskDialog({ open, onOpenChange }) {
               <SelectTrigger id="dependencies" className="bg-white border-gray-300">
                 <SelectValue placeholder="Select dependent tasks" />
               </SelectTrigger>
-              <SelectContent className="bg-white border-gray-300 max-h-60 overflow-y-auto">
+              <SelectContent className="bg-white border-gray-300 max-h-60 overflow-y-auto z-[70]">
                 {tasks.map((task) => (
                   <SelectItem key={task._id} value={task._id}>
                     {task.title}
