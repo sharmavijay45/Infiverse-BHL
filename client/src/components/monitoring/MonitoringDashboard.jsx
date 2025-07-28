@@ -208,6 +208,15 @@ export function MonitoringDashboard({ employee, monitoringStatus }) {
                   {monitoringStatus.activity?.isIdle ? 'Idle' : 'Active'}
                 </span>
               </div>
+              {/* Platform compatibility indicator */}
+              {typeof window !== 'undefined' && !navigator.userAgent.includes('Windows') && (
+                <div className="flex items-center gap-2 mt-2 p-2 bg-yellow-50 border border-yellow-200 rounded-md">
+                  <div className="w-2 h-2 rounded-full bg-yellow-500" />
+                  <span className="text-xs text-yellow-700">
+                    Browser monitoring requires Windows platform
+                  </span>
+                </div>
+              )}
             </div>
             <div className="space-y-2">
               <p className="text-sm font-medium text-muted-foreground">Session Info</p>

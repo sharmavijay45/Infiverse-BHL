@@ -89,6 +89,18 @@ app.get(/^\/(?!api).*/, (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
+// System info endpoint
+app.get('/api/system/info', (req, res) => {
+  res.json({
+    platform: process.platform,
+    browserMonitoringSupported: process.platform === 'win32',
+    screenshotSupported: process.platform === 'win32',
+    message: process.platform === 'win32'
+      ? 'Full monitoring features available'
+      : `Monitoring features limited on ${process.platform} - Windows required for browser detection and screenshots`
+  });
+});
+
 
 // Routes
 app.use("/api/tasks", taskRoutes);

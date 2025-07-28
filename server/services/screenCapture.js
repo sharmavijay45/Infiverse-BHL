@@ -75,10 +75,16 @@ class ScreenCaptureService {
   async captureScreen(captureConfig, trigger = 'scheduled', metadata = {}) {
     try {
       const { employeeId, sessionId } = captureConfig;
-      
+
+      // Check if platform supports screenshots
+      if (process.platform !== 'win32') {
+        console.log(`📸 Screenshot capture not available on ${process.platform} - Windows only feature`);
+        return null;
+      }
+
       // Take screenshot
       const screenshotBuffer = await screenshot({ format: 'png' });
-      
+
       // Calculate hash for delta detection
       const currentHash = crypto.createHash('md5').update(screenshotBuffer).digest('hex');
       

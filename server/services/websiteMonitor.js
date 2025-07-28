@@ -50,6 +50,12 @@ class WebsiteMonitor {
 
     console.log(`🖥️ Platform: ${this.platform}, Monitoring interval: ${this.monitoringInterval}ms, Browser check: ${this.browserCheckInterval}ms`);
 
+    if (this.isWindows) {
+      console.log(`✅ Browser monitoring and screenshots: ENABLED (Windows platform)`);
+    } else {
+      console.log(`⚠️ Browser monitoring and screenshots: DISABLED (${this.platform} not supported - Windows only)`);
+    }
+
     // Start cache cleanup process
     this.startCacheCleanup();
   }
@@ -60,6 +66,13 @@ class WebsiteMonitor {
   startMonitoring(employeeId, sessionId) {
     if (this.activeSessions.has(employeeId)) {
       console.log(`Website monitoring already active for employee ${employeeId}`);
+      return;
+    }
+
+    // Check if platform supports monitoring
+    if (!this.isWindows) {
+      console.log(`⚠️ Website monitoring is only supported on Windows. Current platform: ${this.platform}`);
+      console.log(`📱 Employee ${employeeId} monitoring disabled - platform not supported`);
       return;
     }
 
@@ -87,11 +100,13 @@ class WebsiteMonitor {
     }, this.browserCheckInterval); // Use optimized browser check interval
 
     this.activeSessions.set(employeeId, sessionData);
-    
+
     // Initialize URL history for this employee
     if (!this.urlHistory.has(employeeId)) {
       this.urlHistory.set(employeeId, []);
     }
+
+    console.log(`🌐 Website monitoring enabled with real browser detection`);
   }
 
   /**
@@ -259,23 +274,20 @@ class WebsiteMonitor {
 
 
   /**
-   * Get active window information with cross-platform support
+   * Get active window information - Windows only
    */
   async getActiveWindow() {
     try {
       if (this.isWindows) {
         return await this.getActiveWindowWindows();
-      } else if (this.isLinux) {
-        return await this.getActiveWindowLinux();
-      } else if (this.isMacOS) {
-        return await this.getActiveWindowMacOS();
       } else {
-        console.warn(`⚠️ Unsupported platform: ${this.platform}, using fallback method`);
-        return await this.getActiveWindowFallback();
+        // Only Windows is supported for browser monitoring
+        console.log(`🔄 Browser monitoring not available on ${this.platform} - Windows only feature`);
+        return null;
       }
     } catch (error) {
       console.error('Error getting active window:', error);
-      return await this.getActiveWindowFallback();
+      return null;
     }
   }
 
