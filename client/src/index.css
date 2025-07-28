@@ -1,0 +1,572 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Theme - Bright backgrounds, dark text */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 280 100% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 180 100% 50%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 280 100% 60%;
+    --radius: 1rem;
+
+    /* Light Theme Design System Variables */
+    --gradient-primary: linear-gradient(135deg, hsl(280 100% 60%) 0%, hsl(260 100% 65%) 50%, hsl(240 100% 70%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(240 4.8% 95.9%) 0%, hsl(0 0% 100%) 100%);
+    --gradient-accent: linear-gradient(45deg, hsl(180 100% 50%) 0%, hsl(200 100% 55%) 100%);
+    --gradient-cyber: linear-gradient(90deg, hsl(280 100% 60%) 0%, hsl(180 100% 50%) 50%, hsl(200 100% 55%) 100%);
+
+    /* Light Theme Neomorphic Shadows */
+    --neo-shadow-light: 8px 8px 16px hsl(240 5.9% 85%), -8px -8px 16px hsl(0 0% 100%);
+    --neo-shadow-inset: inset 4px 4px 8px hsl(240 5.9% 85%), inset -4px -4px 8px hsl(0 0% 100%);
+    --neo-shadow-hover: 12px 12px 24px hsl(240 5.9% 80%), -12px -12px 24px hsl(0 0% 100%);
+
+    /* Light Theme Glows (Subtle) */
+    --glow-primary: 0 0 15px hsl(280 100% 60% / 0.3);
+    --glow-accent: 0 0 15px hsl(180 100% 50% / 0.3);
+    --glow-cyber: 0 0 20px hsl(200 100% 55% / 0.4);
+
+    /* Advanced Transitions */
+    --transition-neo: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-cyber: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-smooth: all 0.2s ease-out;
+
+    /* Sidebar variables */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark Theme - Black backgrounds, white text, bright accents */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 3.7% 8%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 3.7% 8%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 280 100% 85%;
+    --primary-foreground: 240 10% 3.9%;
+    --secondary: 240 3.7% 12%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 12%;
+    --muted-foreground: 0 0% 75%;
+    --accent: 180 100% 85%;
+    --accent-foreground: 240 10% 3.9%;
+    --destructive: 0 85% 75%;
+    --destructive-foreground: 240 10% 3.9%;
+    --border: 240 3.7% 15%;
+    --input: 240 3.7% 12%;
+    --ring: 280 100% 85%;
+
+    /* Dark Theme Bright Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(280 100% 85%) 0%, hsl(260 100% 90%) 50%, hsl(240 100% 95%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(240 3.7% 12%) 0%, hsl(240 3.7% 8%) 100%);
+    --gradient-accent: linear-gradient(45deg, hsl(180 100% 85%) 0%, hsl(200 100% 80%) 100%);
+    --gradient-cyber: linear-gradient(90deg, hsl(280 100% 85%) 0%, hsl(180 100% 85%) 50%, hsl(200 100% 80%) 100%);
+
+    /* Dark Theme Shadows */
+    --neo-shadow-light: 8px 8px 16px hsl(240 10% 1%), -8px -8px 16px hsl(240 3.7% 6%);
+    --neo-shadow-inset: inset 4px 4px 8px hsl(240 10% 1%), inset -4px -4px 8px hsl(240 3.7% 6%);
+    --neo-shadow-hover: 12px 12px 24px hsl(240 10% 0%), -12px -12px 24px hsl(240 3.7% 8%);
+
+    /* Dark Theme Bright Glows */
+    --glow-primary: 0 0 35px hsl(280 100% 85% / 0.9);
+    --glow-accent: 0 0 35px hsl(180 100% 85% / 0.9);
+    --glow-cyber: 0 0 45px hsl(200 100% 80% / 1.0);
+
+    /* Sidebar variables for dark mode */
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 240 5.9% 10%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+/* Remove auth-container overrides to use global theme */
+
+
+
+/* Custom styles (unchanged) */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.dialog-content {
+  
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 525px;
+/*   z-index: 1000; */
+}
+
+body.sidebar-open {
+  overflow: hidden;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 768px) {
+  .sidebar-open .fixed {
+    visibility: visible;
+  }
+
+  /* Mobile-first improvements */
+  .card-modern {
+    padding: 1rem;
+  }
+
+  .hover-lift:hover {
+    transform: none; /* Disable hover effects on mobile */
+  }
+
+  /* Touch-friendly interactions */
+  .hover-lift:active {
+    transform: scale(0.98);
+  }
+}
+
+@media (max-width: 640px) {
+  /* Small mobile adjustments */
+  .text-4xl {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  .text-3xl {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+
+  /* Reduce padding on small screens */
+  .p-6 {
+    padding: 1rem;
+  }
+
+  .px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .py-6 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop enhancements */
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  .card-modern:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(0, 0, 0, 0.8);
+  }
+
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-pulse,
+  .animate-spin,
+  .animate-bounce {
+    animation: none !important;
+  }
+}
+
+/* Unique "Cyber Neomorphic" UI Utilities */
+@layer utilities {
+  /* Neomorphic Effects */
+  .neo-card {
+    background: hsl(var(--card));
+    border-radius: var(--radius);
+    box-shadow: var(--neo-shadow-light);
+    transition: var(--transition-neo);
+    border: 1px solid hsl(var(--border) / 0.3);
+  }
+
+  .neo-card:hover {
+    box-shadow: var(--neo-shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  .neo-inset {
+    box-shadow: var(--neo-shadow-inset);
+    background: hsl(var(--muted));
+  }
+
+  .neo-button {
+    background: hsl(var(--card));
+    box-shadow: var(--neo-shadow-light);
+    border: none;
+    transition: var(--transition-neo);
+  }
+
+  .neo-button:hover {
+    box-shadow: var(--neo-shadow-hover);
+  }
+
+  .neo-button:active {
+    box-shadow: var(--neo-shadow-inset);
+    transform: scale(0.98);
+  }
+
+  /* Cyber Gradients */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .gradient-cyber {
+    background: var(--gradient-cyber);
+    background-size: 200% 200%;
+    animation: cyberFlow 4s ease infinite;
+  }
+
+  /* Cyber Glows */
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+
+  .glow-cyber {
+    box-shadow: var(--glow-cyber);
+  }
+
+  /* Unique Transitions */
+  .transition-neo {
+    transition: var(--transition-neo);
+  }
+
+  .transition-cyber {
+    transition: var(--transition-cyber);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  /* Cyber Hover Effects */
+  .hover-neo {
+    transition: var(--transition-neo);
+  }
+
+  .hover-neo:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--neo-shadow-hover);
+  }
+
+  .hover-cyber {
+    transition: var(--transition-cyber);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hover-cyber::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: var(--transition-cyber);
+  }
+
+  .hover-cyber:hover::before {
+    left: 100%;
+  }
+
+  .hover-cyber:hover {
+    transform: scale(1.05);
+    box-shadow: var(--glow-cyber);
+  }
+
+  /* Theme-Aware Cyber Backgrounds */
+  .bg-cyber-grid {
+    background-image:
+      linear-gradient(hsl(var(--primary) / 0.2) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.2) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .bg-cyber-dots {
+    background-image: radial-gradient(circle, hsl(var(--primary) / 0.2) 1px, transparent 1px);
+    background-size: 15px 15px;
+  }
+
+  /* Loading Animations */
+  .pulse-cyber {
+    animation: pulseCyber 2s ease-in-out infinite;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s var(--transition-cyber);
+  }
+
+  .slide-up {
+    animation: slideUp 0.6s var(--transition-cyber);
+  }
+
+  .scale-in {
+    animation: scaleIn 0.4s var(--transition-cyber);
+  }
+
+  .float-cyber {
+    animation: floatCyber 3s ease-in-out infinite;
+  }
+}
+
+/* Unique Cyber Neomorphic Keyframes */
+@keyframes cyberFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseCyber {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: var(--glow-primary);
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: var(--glow-accent);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes glow-pulse {
+  0% {
+    box-shadow: 0 0 5px hsl(var(--primary) / 0.5);
+  }
+  100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.8);
+  }
+}
+
+@keyframes pulse-cyber {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Animation Classes */
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+.animate-pulse-cyber {
+  animation: pulse-cyber 1.5s ease-in-out infinite;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Search Container and Dropdown Positioning */
+.search-container {
+  position: relative;
+  z-index: 50;
+}
+
+.search-dropdown {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin-top: 0.5rem !important;
+  z-index: 60 !important;
+  transform: none !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) rotate(-2deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes floatCyber {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: var(--glow-primary);
+  }
+  50% {
+    box-shadow: var(--glow-cyber);
+  }
+}
+
+/* Custom Scrollbar Styles */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--border));
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--muted-foreground));
+}
+
+/* Layout Utilities for Fixed Sidebar and Navbar */
+.pt-18 {
+  padding-top: 4.5rem; /* 72px - height of fixed header */
+}
+
+.h-18 {
+  height: 4.5rem; /* 72px */
+}
+
+/* Ensure proper scrolling behavior */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Main content area scrolling */
+.main-content-scroll {
+  height: calc(100vh - 4.5rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+}

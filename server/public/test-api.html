@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Screenshots API</title>
+</head>
+<body>
+    <h1>Test Screenshots API</h1>
+    <button onclick="testAPI()">Test API</button>
+    <div id="result"></div>
+
+    <script>
+        async function testAPI() {
+            const employeeId = '683011a017ba6ac0f84fb39b';
+            const date = '2025-07-26';
+            const url = `http://localhost:5000/api/monitoring/employees/${employeeId}/screenshots?date=${date}`;
+            
+            console.log('Testing URL:', url);
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                document.getElementById('result').innerHTML = `
+                    <h2>Response:</h2>
+                    <p>Status: ${response.status}</p>
+                    <p>Screenshots: ${data.screenshots ? data.screenshots.length : 0}</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                
+                console.log('Response:', data);
+            } catch (error) {
+                document.getElementById('result').innerHTML = `
+                    <h2>Error:</h2>
+                    <p>${error.message}</p>
+                `;
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
