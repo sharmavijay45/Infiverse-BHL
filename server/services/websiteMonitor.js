@@ -338,27 +338,35 @@ class WebsiteMonitor {
       // Method 1: Process-based detection (works in headless environments)
       try {
         console.log('🔍 Checking for browser processes...');
-        const { stdout: processInfo } = await execAsync('ps aux | grep -E "(chrome|firefox|chromium|edge)" | grep -v grep');
+
+        // Try multiple process detection methods
+        let processInfo = '';
+        try {
+          const { stdout } = await execAsync('ps aux | grep -E "(chrome|firefox|chromium|edge)" | grep -v grep');
+          processInfo = stdout;
+        } catch (psError) {
+          console.log('❌ ps command not available, trying alternative...');
+          try {
+            // Alternative: check /proc directory
+            const { stdout } = await execAsync('find /proc -name "comm" -exec grep -l "chrome\\|firefox\\|chromium" {} \\; 2>/dev/null | head -5');
+            if (stdout.trim()) {
+              processInfo = 'chrome process found';
+            }
+          } catch (procError) {
+            console.log('❌ /proc method also failed');
+          }
+        }
 
         if (processInfo.trim()) {
-          console.log('✅ Browser processes found:', processInfo.trim().split('\n').length, 'processes');
+          console.log('✅ Browser processes found');
 
-          // Parse the process info to get browser details
-          const processes = processInfo.trim().split('\n');
-          for (const process of processes) {
-            const browserInfo = this.parseBrowserProcess(process);
-            if (browserInfo) {
-              console.log('✅ Active browser detected:', browserInfo.application);
-
-              // Generate a simulated browser activity
-              return {
-                title: this.generateBrowserTitle(browserInfo.application),
-                application: browserInfo.application,
-                url: this.extractUrlFromProcess(process) || 'unknown',
-                isProcessBased: true
-              };
-            }
-          }
+          // Since we found browser processes, return a generic browser activity
+          return {
+            title: 'Browser Activity Detected',
+            application: 'Google Chrome',
+            url: 'unknown',
+            isProcessBased: true
+          };
         }
       } catch (processError) {
         console.log('❌ Process detection failed:', processError.message);

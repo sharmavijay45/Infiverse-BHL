@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
     wmctrl \
     x11-utils \
     xvfb \
+    x11-xserver-utils \
+    procps \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
