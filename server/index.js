@@ -153,7 +153,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: ['http://localhost:5173','http://192.168.1.2:5173','https://main-workflow.vercel.app','https://workflowmanager.vercel.app'],  // Replace with your frontend's URL
+    origin: ['http://localhost:5173','http://192.168.1.2:5173','https://main-workflow.vercel.app','https://workflowmanager.vercel.app','https://infiverse-bhl.vercel.app'],  // Replace with your frontend's URL
     methods: ['GET', 'POST'],
     credentials: true,  // Allow credentials (cookies, HTTP authentication)
   },
@@ -161,7 +161,7 @@ const io = socketIo(server, {
 
 // CORS Configuration
 const corsOptions = {
-  origin: ['http://localhost:5173','http://192.168.1.2:5173','https://main-workflow.vercel.app','https://workflowmanager.vercel.app'],  // Replace with your frontend's URL
+  origin: ['http://localhost:5173','http://192.168.1.2:5173','https://main-workflow.vercel.app','https://workflowmanager.vercel.app','https://infiverse-bhl.vercel.app'],  // Replace with your frontend's URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,  // Allow credentials (cookies, HTTP authentication)
 };
